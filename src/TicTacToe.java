@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class TicTacToe {
     private char[][] board;
     private boolean gameOver;
@@ -35,9 +37,57 @@ public class TicTacToe {
     }
 
     public void playGame(){
-        displayBoard();
+        //displayBoard();
         while (!gameOver){
-            //displayBoard();
+            displayBoard();
+            makeMove();
+            if(checkWin()){
+                System.out.println("Player " + currentPlayer + " wins");
+                gameOver = true;
+            }else if(checkTie()){
+                System.out.println("It's a tie");
+                gameOver = true;
+            }
+            currentPlayer = (currentPlayer == 'X') ? 'X' : 'O';
         }
+        displayBoard();
+    }
+
+    public void makeMove(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Player " + currentPlayer + "enter your move (row[0-2]) ,column[0-2]");
+        int row = input.nextInt();
+        int column = input.nextInt();
+
+        if (isValidMove(row,column)){
+            board[row][column] = currentPlayer;
+        } else {
+            System.out.println("Invalid move - please try again");
+            makeMove();
+        }
+    }
+
+    private boolean isValidMove(int row, int column){
+        return row >= 0 && row < 3 && column >= 0 && column < 3 && board[row][column] == ' ';
+    }
+
+    private boolean checkWin(){
+        return true;
+    }
+
+    private boolean checkRows(){
+        return true;
+    }
+
+    private boolean checkColumns(){
+        return true;
+    }
+
+    private boolean checkDiagonals(){
+        return true;
+    }
+
+    private boolean checkTie(){
+        return true;
     }
 }
